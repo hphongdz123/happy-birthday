@@ -2,57 +2,67 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lời chúc trực tiếp</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Panbap/fonts@new/fonts.css">
+<title>Chúc mừng sinh nhật</title>
 <style>
     body {
-        font-family: sans-serif;
+        background: black;
+        color: white;
+        font-family: Arial, sans-serif;
         text-align: center;
-        padding: 20px;
+        margin-top: 50px;
     }
-    #message {
-        width: 90%;
-        max-width: 500px;
-        height: 120px;
+    textarea {
+        width: 80%;
+        height: 100px;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        resize: none;
     }
-    #output {
-        margin-top: 20px;
-        font-size: 24px;
+    .word {
+        font-size: 40px;
         font-weight: bold;
-        color: #ff7094;
-        min-height: 50px;
+        display: inline-block;
+        margin: 10px;
+        opacity: 0;
+        animation: fadeIn 0.8s forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
     }
 </style>
 </head>
 <body>
 
-<h2>Viết Lời Chúc Đặc Biệt</h2>
-<p><strong>Hướng dẫn:</strong> Dùng <code>|</code> để phân tách từ, dùng <code>#time</code> để chèn thời gian.</p>
-
-<textarea id="message">Chúc|Mừng|Sinh Nhật|Ngọc Thảo|Luôn|Vui Vẻ|Hạnh Phúc|Yêu Đời|#time|❤</textarea><br>
-<button id="showBtn">Hiển thị lời chúc</button>
+<h1>💖 Chúc Mừng Sinh Nhật 💖</h1>
+<textarea id="message">Chúc|Mừng|Sinh Nhật|Ngọc Thảo|Luôn|Vui Vẻ|Hạnh Phúc|Yêu Đời|❤</textarea>
+<br><br>
+<button onclick="startEffect()">Bắt đầu hiệu ứng</button>
 
 <div id="output"></div>
 
 <script>
-function getCurrentTime() {
-    const now = new Date();
-    return now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
+function startEffect() {
+    const output = document.getElementById("output");
+    output.innerHTML = ""; // Xóa nội dung cũ
+    const msg = document.getElementById("message").value;
+    const words = msg.split("|");
 
-document.getElementById('showBtn').addEventListener('click', () => {
-    let text = document.getElementById('message').value;
-    text = text.replace(/#time/g, getCurrentTime());
-    const parts = text.split('|');
-    document.getElementById('output').innerHTML = parts.join(' ');
-});
+    let delay = 0;
+    words.forEach((word, index) => {
+        setTimeout(() => {
+            const span = document.createElement("span");
+            span.className = "word";
+            span.textContent = word;
+            output.appendChild(span);
+        }, delay);
+        delay += 800; // thời gian chờ giữa các chữ
+    });
+}
 </script>
 
 </body>
 </html>
-
-
-
-</html>
-
